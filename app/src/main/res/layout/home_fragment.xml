@@ -19,7 +19,7 @@
                 android:layout_width="match_parent"
                 android:id="@+id/homeFragmentCollapsingToolbar"
                 android:background="@drawable/olive_ranch_bg"
-                app:toolbarId="@id/toolbar"
+                app:toolbarId="@id/homeFragmentToolbar"
                 app:contentScrim="?attr/colorPrimary"
                 app:layout_scrollFlags="scroll|exitUntilCollapsed"
                 android:layout_height="match_parent">
@@ -46,7 +46,7 @@
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:layout_width="wrap_content"
             android:id="@+id/homeFloatingbuttonShop"
-            app:layout_anchor="@id/mainActivityAppbar"
+            app:layout_anchor="@id/homeFragmentAppbar"
             app:layout_anchorGravity="bottom|end"
             android:layout_margin="16dp"
             app:srcCompat="@drawable/ic_baseline_shopping_cart"

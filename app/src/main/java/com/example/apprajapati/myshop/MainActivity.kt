@@ -43,15 +43,15 @@ class MainActivity : AppCompatActivity() {
         lifecycle.addObserver(MyActivityLifecycleObserver())
         // Appcompatactivity already impplements the lifecycle owner interface.
 
-        binding.collapsingToolbar.title = getString(R.string.app_name)
+       //--- binding.collapsingToolbar.title = getString(R.string.app_name)
         //binding.toolbar.title = getString(R.string.app_name)
 
         //To use viewModels<>() you need android activity ktx library
-        val viewModel by viewModels<MainViewModel>()
+//        val viewModel by viewModels<MainViewModel>()
         // Lazy view model so it won't create an instance until it is needed in a component.
         // by running this, it won't print init{} log because it hasn't been created .
 
-        viewModel.loadData()
+//        viewModel.loadData()
         // now it will instantiate and will call init{} in HomeViewModel
 
         // The following can be done using Lamdas
@@ -65,21 +65,48 @@ class MainActivity : AppCompatActivity() {
          */
 
         // lamdas create cleaner and readable code
-        binding.floatingbuttonShop.setOnClickListener{
-            view ->
-            Snackbar.make(view!!, "Clicked", Snackbar.LENGTH_SHORT).show()
-        }
+//        binding.floatingbuttonShop.setOnClickListener{
+//            view ->
+//            Snackbar.make(view!!, "Clicked", Snackbar.LENGTH_SHORT).show()
+//        }
 
         //adding viewmodel observer...
 
-        viewModel.info.observe(this ){
-            showSnackbar(it)
-        }
+//        viewModel.info.observe(this ){
+//            showSnackbar(it)
+//        }
 
-        binding.floatingbuttonShop.setOnClickListener{
-            view -> viewModel.loadData()
-        }
+//        binding.floatingbuttonShop.setOnClickListener{
+//            view -> viewModel.loadData()
+//        }
 
+        //supportFragmentManager.commit
+
+        binding.tabs.setOnNavigationItemSelectedListener {
+            item ->
+                when(item.itemId) {
+                    R.id.action_home -> goHome()
+                    R.id.action_shop -> goShop()
+                    R.id.action_tours -> goTour()
+                    else -> false
+                }
+                
+        }
+    }
+
+    private fun goHome(): Boolean {
+        //supportFragmentManager.commit
+        return true
+    }
+
+    private fun goShop(): Boolean {
+        //supportFragmentManager.commit
+        return true
+    }
+
+    private fun goTour(): Boolean {
+        //supportFragmentManager.commit
+        return true
     }
 
     private fun showSnackbar(message: Int){

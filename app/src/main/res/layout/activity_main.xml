@@ -1,58 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout>
-
-    <androidx.coordinatorlayout.widget.CoordinatorLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
-        android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:fitsSystemWindows="true"
-        tools:context=".MainActivity">
+        android:orientation="vertical"
+        android:layout_width="match_parent">
 
-        <com.google.android.material.appbar.AppBarLayout
+        <FrameLayout
             android:layout_width="match_parent"
-            android:id="@+id/mainActivityAppbar"
-            android:fitsSystemWindows="true"
-            android:layout_height="200dp">
+            android:layout_weight="1"
+            android:id="@+id/container"
+            android:layout_height="0dp" />
 
-            <com.google.android.material.appbar.CollapsingToolbarLayout
-                android:layout_width="match_parent"
-                android:id="@+id/collapsingToolbar"
-                android:background="@drawable/olive_ranch_bg"
-                app:toolbarId="@id/toolbar"
-                app:contentScrim="?attr/colorPrimary"
-                app:layout_scrollFlags="scroll|exitUntilCollapsed"
-                android:layout_height="match_parent">
+        <com.google.android.material.bottomnavigation.BottomNavigationView
+            android:layout_width="match_parent"
+            android:id="@+id/tabs"
+            app:menu="@menu/negivation_menu_tabs"
+            style="@style/Widget.MaterialComponents.BottomNavigationView.Colored"
+            android:layout_height="wrap_content"/>
 
-                <!--
-                app:contentScrim="?attr/colorPrimary"  enabled that when scrolled up,
-                collapsing toolbar view will disappear and normal toolbar color will appear
-
-                app:layout_scrollFlags="scroll|exitUntilCollapsed" - enables collapsing toolbar
-                -->
-
-                <com.google.android.material.appbar.MaterialToolbar
-                    android:layout_width="match_parent"
-                    android:id="@+id/toolbar"
-                    app:layout_collapseMode="pin"
-                    android:layout_height="?attr/actionBarSize" />
-
-            </com.google.android.material.appbar.CollapsingToolbarLayout>
-
-        </com.google.android.material.appbar.AppBarLayout>
-
-       <include layout="@layout/content_scrolling" />
-
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:layout_width="wrap_content"
-            android:id="@+id/floatingbuttonShop"
-            app:layout_anchor="@id/mainActivityAppbar"
-            app:layout_anchorGravity="bottom|end"
-            android:layout_margin="16dp"
-            app:srcCompat="@drawable/ic_baseline_shopping_cart"
-            android:layout_height="wrap_content" />
-
-    </androidx.coordinatorlayout.widget.CoordinatorLayout>
-
+    </LinearLayout>
 </layout>
