@@ -50,4 +50,6 @@ dependencies {
 
     // To handle lifecycle events
     implementation "androidx.lifecycle:lifecycle-runtime-ktx:2.3.0"
+    //view model and activity.. use i.e by viewModels<ViewModelClass>()
+    implementation "androidx.activity:activity-ktx:1.2.0"
 }

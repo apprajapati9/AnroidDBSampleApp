@@ -3,9 +3,11 @@ package com.example.apprajapati.myshop
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import androidx.activity.viewModels
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Lifecycle
 import com.example.apprajapati.myshop.databinding.ActivityMainBinding
+import com.example.apprajapati.myshop.viewmodel.MainViewModel
 import com.google.android.material.snackbar.Snackbar
 
 class MainActivity : AppCompatActivity() {
@@ -43,6 +45,14 @@ class MainActivity : AppCompatActivity() {
 
         binding.collapsingToolbar.title = getString(R.string.app_name)
         //binding.toolbar.title = getString(R.string.app_name)
+
+        //To use viewModels<>() you need android activity ktx library
+        val viewModel by viewModels<MainViewModel>()
+        // Lazy view model so it won't create an instance until it is needed in a component.
+        // by running this, it won't print init{} log because it hasn't been created .
+
+        viewModel.loadData()
+        // now it will instantiate and will call init{} in HomeViewModel
 
         // The following can be done using Lamdas
         /*
