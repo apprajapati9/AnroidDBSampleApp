@@ -2,9 +2,11 @@ package com.example.apprajapati.myshop
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Lifecycle
 import com.example.apprajapati.myshop.databinding.ActivityMainBinding
+import com.google.android.material.snackbar.Snackbar
 
 class MainActivity : AppCompatActivity() {
 
@@ -41,5 +43,22 @@ class MainActivity : AppCompatActivity() {
 
         binding.collapsingToolbar.title = getString(R.string.app_name)
         //binding.toolbar.title = getString(R.string.app_name)
+
+        // The following can be done using Lamdas
+        /*
+        binding.floatingbuttonShop.setOnClickListener( object : View.OnClickListener{
+            override fun onClick(v: View?) {
+                Snackbar.make(v!!, "Clicked", Snackbar.LENGTH_SHORT).show()
+            }
+
+        })
+         */
+
+        // lamdas create cleaner and readable code
+        binding.floatingbuttonShop.setOnClickListener{
+            view ->
+            Snackbar.make(view!!, "Clicked", Snackbar.LENGTH_SHORT).show()
+        }
+
     }
 }
