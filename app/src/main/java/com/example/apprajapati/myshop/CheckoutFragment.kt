@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.ViewModelProvider
 import com.example.apprajapati.myshop.databinding.CheckoutFragmentBinding
 import com.example.apprajapati.myshop.viewmodel.CheckoutViewModel
 import com.google.android.material.snackbar.Snackbar
@@ -28,21 +29,27 @@ class CheckoutFragment: Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val checkoutModel by viewModels<CheckoutViewModel>()
+        // this initializes new model everytime
+        //val checkoutModel by viewModels<CheckoutViewModel>()
+
+        // if you want to use from activity to have access to all fragments then should use following..
+        val checkoutModel = activity?.run {
+            ViewModelProvider(requireActivity())[CheckoutViewModel::class.java]
+        }
 
         binding!!.addQuantityButton.setOnClickListener{
-            checkoutModel.increaseQuantity()
+            checkoutModel!!.increaseQuantity()
         }
 
         binding!!.removeQuantityButton.setOnClickListener{
-            checkoutModel.decreaseQuantity()
+            checkoutModel!!.decreaseQuantity()
         }
 
-        checkoutModel.quantity.observe(requireActivity()){
+        checkoutModel!!.quantity.observe(requireActivity()){
             updateQuantity(it)
         }
 
-        checkoutModel.totalPrice.observe(requireActivity()){
+        checkoutModel!!.totalPrice.observe(requireActivity()){
             showSnackbar(it)
         }
 
@@ -52,11 +59,15 @@ class CheckoutFragment: Fragment() {
     }
 
     private fun updateQuantity(quantity: Int){
-        binding!!.total.text = quantity.toString()
+        if(binding!= null){
+            binding!!.total.text = quantity.toString()
+        }
     }
 
     private fun showSnackbar(message: Int){
-        Snackbar.make(binding!!.root, "Our observe count $message", Snackbar.LENGTH_SHORT).show()
+        if(binding != null){
+            Snackbar.make(binding!!.root, "Our observe count $message", Snackbar.LENGTH_SHORT).show()
+        }
     }
 
     override fun onDestroyView() {

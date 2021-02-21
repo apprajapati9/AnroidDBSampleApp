@@ -4,7 +4,10 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.commit
+import androidx.lifecycle.ViewModelProvider
 import com.example.apprajapati.myshop.databinding.ActivityMainBinding
+import com.example.apprajapati.myshop.viewmodel.CheckoutViewModel
+import com.example.apprajapati.myshop.viewmodel.MainViewModel
 import com.google.android.material.snackbar.Snackbar
 
 class MainActivity : AppCompatActivity() {
@@ -61,6 +64,22 @@ class MainActivity : AppCompatActivity() {
                     else -> false
                 }
                 
+        }
+
+        val viewModel = ViewModelProvider(this)[CheckoutViewModel::class.java]
+        viewModel.quantity.observe(this){
+            upgradeBadge(it)
+        }
+    }
+
+    private fun upgradeBadge(item: Int?) {
+        val badge = binding.tabs.getOrCreateBadge(R.id.action_shop)
+        if(item!! > 0){
+            badge.number = item
+            badge.isVisible = true
+        }else{
+            badge.clearNumber()
+            badge.isVisible = false
         }
     }
 
