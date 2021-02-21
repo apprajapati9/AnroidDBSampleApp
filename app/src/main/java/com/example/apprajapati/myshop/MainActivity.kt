@@ -70,5 +70,19 @@ class MainActivity : AppCompatActivity() {
             Snackbar.make(view!!, "Clicked", Snackbar.LENGTH_SHORT).show()
         }
 
+        //adding viewmodel observer...
+
+        viewModel.info.observe(this ){
+            showSnackbar(it)
+        }
+
+        binding.floatingbuttonShop.setOnClickListener{
+            view -> viewModel.loadData()
+        }
+
+    }
+
+    private fun showSnackbar(message: Int){
+        Snackbar.make(binding.root, "Our observe count $message", Snackbar.LENGTH_SHORT).show()
     }
 }
