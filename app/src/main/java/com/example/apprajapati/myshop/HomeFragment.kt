@@ -1,9 +1,9 @@
 package com.example.apprajapati.myshop
 
+import android.content.Intent
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
+import androidx.appcompat.widget.Toolbar
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -29,6 +29,21 @@ class HomeFragment : Fragment() {
 
         //ONE WAY... using databindingUtil...
         binding = DataBindingUtil.inflate(inflater,R.layout.home_fragment, container, false)
+        setHasOptionsMenu(true) // To enable option menu
+
+        binding!!.homeFragmentToolbar.inflateMenu(R.menu.share_menu)
+        binding!!.homeFragmentToolbar.setOnMenuItemClickListener(
+                Toolbar.OnMenuItemClickListener {
+                    when (it.itemId){
+                        R.id.mi_share -> {
+                            handleShare()
+                            true
+                        }
+                        else -> false
+                    }
+
+                }
+        )
 
         //lifecycle.addObserver(MyActivityLifecycleObserver())
 
@@ -87,6 +102,15 @@ class HomeFragment : Fragment() {
 
     private fun showSnackbar(message: Int){
         Snackbar.make(binding!!.root, "Our observe count $message", Snackbar.LENGTH_SHORT).show()
+    }
+
+    private fun handleShare(){
+        val intent = Intent().apply {
+            action = Intent.ACTION_SEND
+            type = "text/plain"
+            putExtra(Intent.EXTRA_TEXT, "Implicit intent text!")
+        }
+        startActivity(intent)
     }
 
     override fun onDestroyView() {

@@ -23,7 +23,9 @@ class CheckoutViewModel : ViewModel() {
     }
 
     fun decreaseQuantity(){
-        _quantity.value = quantity.value!!.minus(1)
+        if(_quantity.value != 0){ // quantity cannot be in minus... safe check
+            _quantity.value = quantity.value!!.minus(1)
+        }
     }
 
     fun checkout(){

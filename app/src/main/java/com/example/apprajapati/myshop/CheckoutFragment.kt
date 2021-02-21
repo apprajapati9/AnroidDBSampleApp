@@ -39,7 +39,7 @@ class CheckoutFragment: Fragment() {
         }
 
         checkoutModel.quantity.observe(requireActivity()){
-            binding!!.total.text = it.toString()
+            updateQuantity(it)
         }
 
         checkoutModel.totalPrice.observe(requireActivity()){
@@ -49,6 +49,10 @@ class CheckoutFragment: Fragment() {
         binding!!.checkoutButton.setOnClickListener{
             checkoutModel.checkout()
         }
+    }
+
+    private fun updateQuantity(quantity: Int){
+        binding!!.total.text = quantity.toString()
     }
 
     private fun showSnackbar(message: Int){
