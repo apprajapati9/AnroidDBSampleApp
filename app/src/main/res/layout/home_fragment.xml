@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout>
-
     <androidx.coordinatorlayout.widget.CoordinatorLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -12,13 +11,13 @@
 
         <com.google.android.material.appbar.AppBarLayout
             android:layout_width="match_parent"
-            android:id="@+id/mainActivityAppbar"
+            android:id="@+id/homeFragmentAppbar"
             android:fitsSystemWindows="true"
             android:layout_height="200dp">
 
             <com.google.android.material.appbar.CollapsingToolbarLayout
                 android:layout_width="match_parent"
-                android:id="@+id/collapsingToolbar"
+                android:id="@+id/homeFragmentCollapsingToolbar"
                 android:background="@drawable/olive_ranch_bg"
                 app:toolbarId="@id/toolbar"
                 app:contentScrim="?attr/colorPrimary"
@@ -34,7 +33,7 @@
 
                 <com.google.android.material.appbar.MaterialToolbar
                     android:layout_width="match_parent"
-                    android:id="@+id/toolbar"
+                    android:id="@+id/homeFragmentToolbar"
                     app:layout_collapseMode="pin"
                     android:layout_height="?attr/actionBarSize" />
 
@@ -42,11 +41,11 @@
 
         </com.google.android.material.appbar.AppBarLayout>
 
-       <include layout="@layout/content_scrolling" />
+        <include layout="@layout/content_scrolling" />
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:layout_width="wrap_content"
-            android:id="@+id/floatingbuttonShop"
+            android:id="@+id/homeFloatingbuttonShop"
             app:layout_anchor="@id/mainActivityAppbar"
             app:layout_anchorGravity="bottom|end"
             android:layout_margin="16dp"
