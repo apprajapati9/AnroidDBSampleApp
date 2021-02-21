@@ -38,5 +38,8 @@ class MainActivity : AppCompatActivity() {
         //Observer class needs observer and observer is MainActivity so you can do the following to observe lifecycle events...
         lifecycle.addObserver(MyActivityLifecycleObserver())
         // Appcompatactivity already impplements the lifecycle owner interface.
+
+        binding.collapsingToolbar.title = getString(R.string.app_name)
+        //binding.toolbar.title = getString(R.string.app_name)
     }
 }
