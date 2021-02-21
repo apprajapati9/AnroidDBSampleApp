@@ -35,6 +35,16 @@ class MyActivityLifecycleObserver : LifecycleObserver {
         Log.i(LOG_TAG, "On Resume" )
     }
 
+    @OnLifecycleEvent(Lifecycle.Event.ON_STOP)
+    fun onStop(){
+        Log.i(LOG_TAG, "On Stop" )
+    }
+
+    @OnLifecycleEvent(Lifecycle.Event.ON_DESTROY)
+    fun onDestroy(){
+        Log.i(LOG_TAG, "On Destroy" )
+    }
+
     @OnLifecycleEvent(Lifecycle.Event.ON_PAUSE)
     fun disconnect(){
         Log.i(LOG_TAG, "On Pause" )

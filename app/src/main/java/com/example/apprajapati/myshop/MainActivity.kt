@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.View
 import androidx.activity.viewModels
 import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.commit
 import androidx.lifecycle.Lifecycle
 import com.example.apprajapati.myshop.databinding.ActivityMainBinding
 import com.example.apprajapati.myshop.viewmodel.MainViewModel
@@ -40,7 +41,7 @@ class MainActivity : AppCompatActivity() {
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
 
         //Observer class needs observer and observer is MainActivity so you can do the following to observe lifecycle events...
-        lifecycle.addObserver(MyActivityLifecycleObserver())
+        //lifecycle.addObserver(MyActivityLifecycleObserver())
         // Appcompatactivity already impplements the lifecycle owner interface.
 
        //--- binding.collapsingToolbar.title = getString(R.string.app_name)
@@ -80,7 +81,9 @@ class MainActivity : AppCompatActivity() {
 //            view -> viewModel.loadData()
 //        }
 
-        //supportFragmentManager.commit
+        supportFragmentManager.commit {
+            add(R.id.fragmentContainer, HomeFragment::class.java, null)
+        }
 
         binding.tabs.setOnNavigationItemSelectedListener {
             item ->
@@ -95,17 +98,23 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun goHome(): Boolean {
-        //supportFragmentManager.commit
+        supportFragmentManager.commit {
+            replace(R.id.fragmentContainer, HomeFragment::class.java, null)
+        }
         return true
     }
 
     private fun goShop(): Boolean {
-        //supportFragmentManager.commit
+        supportFragmentManager.commit {
+            replace(R.id.fragmentContainer, ShopFragment::class.java, null)
+        }
         return true
     }
 
     private fun goTour(): Boolean {
-        //supportFragmentManager.commit
+        supportFragmentManager.commit {
+            replace(R.id.fragmentContainer, TourFragment::class.java, null)
+        }
         return true
     }
 
