@@ -6,11 +6,11 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
-import com.example.apprajapati.myshop.databinding.TourFragmentBindingImpl
+import com.example.apprajapati.myshop.databinding.TourFragmentBinding
 
 class TourFragment : Fragment() {
 
-    private lateinit var binding: TourFragmentBindingImpl
+    private lateinit var binding: TourFragmentBinding
 
     override fun onCreateView(
         inflater: LayoutInflater,

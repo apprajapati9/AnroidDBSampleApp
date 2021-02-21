@@ -2,13 +2,9 @@ package com.example.apprajapati.myshop
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.View
-import androidx.activity.viewModels
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.commit
-import androidx.lifecycle.Lifecycle
 import com.example.apprajapati.myshop.databinding.ActivityMainBinding
-import com.example.apprajapati.myshop.viewmodel.MainViewModel
 import com.google.android.material.snackbar.Snackbar
 
 class MainActivity : AppCompatActivity() {
@@ -22,9 +18,11 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
+       // binding = ActivityMainBinding.inflate(layoutInflater)
+        //setContentView(binding.root)
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
         /*
-            viewBinding true
+            -----viewBinding true vs dataBinding true in gradle-----
             There are two ways to inflate setcontentview and using viewBinding you can do by following..
 
             binding = ActivityMainBinding.inflate(layoutInflater)
@@ -38,7 +36,7 @@ class MainActivity : AppCompatActivity() {
         /*
             You can do the same as above but if you are doing data binding then, you need to use this.
          */
-        binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
+
 
         //Observer class needs observer and observer is MainActivity so you can do the following to observe lifecycle events...
         //lifecycle.addObserver(MyActivityLifecycleObserver())
@@ -47,39 +45,7 @@ class MainActivity : AppCompatActivity() {
        //--- binding.collapsingToolbar.title = getString(R.string.app_name)
         //binding.toolbar.title = getString(R.string.app_name)
 
-        //To use viewModels<>() you need android activity ktx library
-//        val viewModel by viewModels<MainViewModel>()
-        // Lazy view model so it won't create an instance until it is needed in a component.
-        // by running this, it won't print init{} log because it hasn't been created .
-
-//        viewModel.loadData()
-        // now it will instantiate and will call init{} in HomeViewModel
-
-        // The following can be done using Lamdas
-        /*
-        binding.floatingbuttonShop.setOnClickListener( object : View.OnClickListener{
-            override fun onClick(v: View?) {
-                Snackbar.make(v!!, "Clicked", Snackbar.LENGTH_SHORT).show()
-            }
-
-        })
-         */
-
-        // lamdas create cleaner and readable code
-//        binding.floatingbuttonShop.setOnClickListener{
-//            view ->
-//            Snackbar.make(view!!, "Clicked", Snackbar.LENGTH_SHORT).show()
-//        }
-
-        //adding viewmodel observer...
-
-//        viewModel.info.observe(this ){
-//            showSnackbar(it)
-//        }
-
-//        binding.floatingbuttonShop.setOnClickListener{
-//            view -> viewModel.loadData()
-//        }
+        //val viewModel: MainViewModel by viewModels()
 
         supportFragmentManager.commit {
             add(R.id.fragmentContainer, HomeFragment::class.java, null)
@@ -113,7 +79,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun goTour(): Boolean {
         supportFragmentManager.commit {
-            replace(R.id.fragmentContainer, TourFragment::class.java, null)
+            replace(R.id.fragmentContainer, CheckoutFragment::class.java, null)
         }
         return true
     }
@@ -122,3 +88,13 @@ class MainActivity : AppCompatActivity() {
         Snackbar.make(binding.root, "Our observe count $message", Snackbar.LENGTH_SHORT).show()
     }
 }
+
+/*
+Error : could not find the DataBindingComponent class
+
+What solved the problem :
+    Rebuilding project.
+    Hint: DataBindingUitl class has red indicator saying "Library source does not match the bytecode for class"
+    so did rebuild to solve this and in return automatically solved the databinding component not found issue as well.
+
+ */
