@@ -18,7 +18,7 @@ class ShopFragment : Fragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding = DataBindingUtil.inflate(inflater, R.layout.shop_fragment, container, false)
         return binding.root
     }
