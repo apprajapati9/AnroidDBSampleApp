@@ -3,8 +3,12 @@ package com.example.apprajapati.myshop
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.FragmentActivity
 import androidx.fragment.app.commit
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.NavHost
+import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.ui.setupWithNavController
 import com.example.apprajapati.myshop.databinding.ActivityMainBinding
 import com.example.apprajapati.myshop.viewmodel.CheckoutViewModel
 import com.example.apprajapati.myshop.viewmodel.MainViewModel
@@ -50,6 +54,9 @@ class MainActivity : AppCompatActivity() {
 
         //val viewModel: MainViewModel by viewModels()
 
+        /* --- Replaced by Navigation component library to handle fragment transaction by itself using graph
+
+
         supportFragmentManager.commit {
             add(R.id.fragmentContainer, HomeFragment::class.java, null)
         }
@@ -67,6 +74,16 @@ class MainActivity : AppCompatActivity() {
                 
         }
 
+
+         */
+
+        val navHostFragment =
+            supportFragmentManager.findFragmentById(R.id.fragmentContainer) as NavHostFragment
+
+        val navController = navHostFragment.navController
+        binding.tabs.setupWithNavController(navController)
+
+
         val viewModel = ViewModelProvider(this)[CheckoutViewModel::class.java]
         viewModel.quantity.observe(this){
             upgradeBadge(it)
@@ -82,44 +99,6 @@ class MainActivity : AppCompatActivity() {
             badge.clearNumber()
             badge.isVisible = false
         }
-    }
-
-    private fun goHome(): Boolean {
-        supportFragmentManager.commit {
-            replace(R.id.fragmentContainer, HomeFragment::class.java, null)
-        }
-        return true
-    }
-
-    private fun goShop(): Boolean {
-        supportFragmentManager.commit {
-            replace(R.id.fragmentContainer, ShopFragment::class.java, null)
-        }
-        return true
-    }
-
-    /*
-        Update tab based on which fragment you wanna show/display to test a particular fragment
-     */
-    private fun goTour(): Boolean {
-        supportFragmentManager.commit {
-            replace(R.id.fragmentContainer, StockFragment::class.java, null)
-        }
-        return true
-    }
-
-    private fun goCheckout(): Boolean {
-        supportFragmentManager.commit {
-            replace(R.id.fragmentContainer, CheckoutFragment::class.java, null)
-        }
-        return true
-    }
-
-    private fun goProductList() : Boolean {
-        supportFragmentManager.commit {
-            replace(R.id.fragmentContainer, ShopProductsFragment::class.java, null)
-        }
-        return true
     }
 
     private fun showSnackbar(message: Int){

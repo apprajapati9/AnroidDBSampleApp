@@ -44,4 +44,10 @@
 
     <!--  shop product fragment -->
     <string name="product_size_lable">%d ml bottle</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <!-- product details fragment -->
+    <string name="add_to_cart_label">Add to Cart</string>
+    <string name="product_image_label">Bottle of olive oil</string>
 </resources>

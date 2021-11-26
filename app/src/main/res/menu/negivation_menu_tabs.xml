@@ -7,7 +7,7 @@
         android:icon="@drawable/ic_home"
         android:title="@string/home_label" />
     <item
-        android:id="@+id/action_tours"
+        android:id="@+id/action_stock"
         android:icon="@drawable/ic_tour"
         android:title="@string/tours_label" />
     <item
@@ -21,7 +21,7 @@
         android:title="@string/shop_label" />
 
     <item
-        android:id="@+id/product_list"
+        android:id="@+id/action_product_list"
         android:icon="@android:drawable/star_big_on"
         android:title="@string/shop_product_list" />
 </menu>
