@@ -30,6 +30,15 @@ class ShopFragment : Fragment() {
             ViewModelProvider(requireActivity())[CheckoutViewModel::class.java]
         }
 
+        myModel?.products?.observe(viewLifecycleOwner, {
+            product ->
+            val productNames = StringBuilder()
+            product.forEach {
+                productNames.appendLine(it.name)
+            }
+            binding.cartContentText.setText(productNames.toString())
+        })
+
         binding.add.setOnClickListener {  myModel?.increaseQuantity() }
         binding.minus.setOnClickListener { (myModel?.decreaseQuantity()) }
 
