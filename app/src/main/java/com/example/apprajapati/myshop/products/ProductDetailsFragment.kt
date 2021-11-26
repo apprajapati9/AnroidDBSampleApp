@@ -12,7 +12,7 @@ import com.example.apprajapati.myshop.R
 import com.example.apprajapati.myshop.databinding.FragmentProductDetailsBinding
 import com.example.apprajapati.myshop.viewmodel.CheckoutViewModel
 
-class ProductDetails : Fragment() {
+class ProductDetailsFragment : Fragment() {
 
     private var viewModel: CheckoutViewModel? = null
     private var _binding : FragmentProductDetailsBinding? = null

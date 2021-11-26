@@ -43,7 +43,7 @@
     </fragment>
     <fragment
         android:id="@+id/productDetails"
-        android:name="com.example.apprajapati.myshop.products.ProductDetails"
+        android:name="com.example.apprajapati.myshop.products.ProductDetailsFragment"
         android:label="fragment_product_details"
         tools:layout="@layout/fragment_product_details" />
 </navigation>
