@@ -8,6 +8,7 @@ import android.util.Log
 import androidx.core.content.ContextCompat
 import com.example.apprajapati.myshop.api.ProductApi
 import com.example.apprajapati.myshop.data.Product
+import com.example.apprajapati.myshop.data.ProductDatabase
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.Types
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
@@ -42,14 +43,16 @@ class ProductRepositoryRetrofit(private val app: Application) {
         return if(products.isSuccessful) products.body()!! else emptyList()
     }
 
+    private val productDao = ProductDatabase.getDatabase(app).productDao()
+
     suspend  fun getProductsWithImages(): List<Product> {
 
         //return data if cache exists
-        val productFromCache = readDataFromFile()
-        Log.i("Ajay", "loaded data from cache")
-        if(productFromCache.isNotEmpty()){
-            return productFromCache
-        }
+//        val productFromCache = readDataFromFile()
+//        Log.i("Ajay", "loaded data from cache")
+//        if(productFromCache.isNotEmpty()){
+//            return productFromCache
+//        }
 
         val response = api.getProductsWithImages()
         Log.i("Ajay", "Data = ${response.body()}" )
@@ -57,11 +60,17 @@ class ProductRepositoryRetrofit(private val app: Application) {
             Log.i("Ajay", "loaded data from web service")
             val products = response.body()?: emptyList()
 
-            storeDataInFile(products)
+            storeDataInDb(products)
 
             products
 
         } else emptyList()
+    }
+
+    private suspend fun storeDataInDb(products: List<Product>?){
+        if(products != null){
+            productDao.insertProducts(products)
+        }
     }
 
     private fun storeDataInFile(products: List<Product>){
