@@ -1,4 +1,4 @@
-package com.example.apprajapati.myshop
+package com.example.apprajapati.myshop.shop
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -7,9 +7,9 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import com.example.apprajapati.myshop.R
 import com.example.apprajapati.myshop.data.Stock
 import com.example.apprajapati.myshop.databinding.StockFragmentBinding
-import com.example.apprajapati.myshop.viewmodel.CheckoutViewModel
 import com.example.apprajapati.myshop.viewmodel.StockViewModel
 
 class StockFragment : Fragment() {
@@ -56,7 +56,8 @@ class StockFragment : Fragment() {
             3-> getString(R.string.firm_3_btn_label)
             else -> " "
         }
-        binding.stockInfoText.text = getString(R.string.stock_info,
+        binding.stockInfoText.text = getString(
+            R.string.stock_info,
                     stock.open, stock.close, stock.change)
     }
 

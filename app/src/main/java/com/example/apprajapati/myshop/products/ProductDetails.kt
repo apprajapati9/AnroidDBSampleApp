@@ -1,6 +1,5 @@
-package com.example.apprajapati.myshop
+package com.example.apprajapati.myshop.products
 
-import android.icu.number.NumberFormatter
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -9,6 +8,7 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
 import coil.load
+import com.example.apprajapati.myshop.R
 import com.example.apprajapati.myshop.databinding.FragmentProductDetailsBinding
 import com.example.apprajapati.myshop.viewmodel.CheckoutViewModel
 
@@ -24,7 +24,8 @@ class ProductDetails : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         // Inflate the layout for this fragment
-        _binding = DataBindingUtil.inflate(inflater, R.layout.fragment_product_details, container, false)
+        _binding = DataBindingUtil.inflate(inflater,
+            R.layout.fragment_product_details, container, false)
         return binding.root
     }
 

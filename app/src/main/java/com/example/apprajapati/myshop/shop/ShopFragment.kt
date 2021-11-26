@@ -1,4 +1,4 @@
-package com.example.apprajapati.myshop
+package com.example.apprajapati.myshop.shop
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -8,6 +8,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import com.example.apprajapati.myshop.R
 import com.example.apprajapati.myshop.data.Product
 import com.example.apprajapati.myshop.databinding.ShopFragmentBinding
 import com.example.apprajapati.myshop.viewmodel.CheckoutViewModel

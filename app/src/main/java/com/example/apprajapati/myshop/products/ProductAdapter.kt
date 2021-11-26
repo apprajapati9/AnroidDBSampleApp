@@ -1,4 +1,4 @@
-package com.example.apprajapati.myshop
+package com.example.apprajapati.myshop.products
 
 import android.annotation.SuppressLint
 import android.icu.text.NumberFormat
@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
+import com.example.apprajapati.myshop.R
 import com.example.apprajapati.myshop.data.Product
 import com.example.apprajapati.myshop.databinding.ProductItemBinding
 

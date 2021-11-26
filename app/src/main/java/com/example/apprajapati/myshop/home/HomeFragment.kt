@@ -1,4 +1,4 @@
-package com.example.apprajapati.myshop
+package com.example.apprajapati.myshop.home
 
 import android.content.Intent
 import android.os.Bundle
@@ -7,6 +7,7 @@ import androidx.appcompat.widget.Toolbar
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import com.example.apprajapati.myshop.R
 import com.example.apprajapati.myshop.databinding.HomeFragmentBinding
 import com.example.apprajapati.myshop.viewmodel.MainViewModel
 import com.google.android.material.snackbar.Snackbar
@@ -28,7 +29,7 @@ class HomeFragment : Fragment() {
     ): View {
 
         //ONE WAY... using databindingUtil...
-        binding = DataBindingUtil.inflate(inflater,R.layout.home_fragment, container, false)
+        binding = DataBindingUtil.inflate(inflater, R.layout.home_fragment, container, false)
         setHasOptionsMenu(true) // To enable option menu
 
         binding!!.homeFragmentToolbar.inflateMenu(R.menu.share_menu)

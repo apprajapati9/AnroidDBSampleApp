@@ -10,32 +10,32 @@
     -->
     <fragment
         android:id="@+id/action_home"
-        android:name="com.example.apprajapati.myshop.HomeFragment"
+        android:name="com.example.apprajapati.myshop.home.HomeFragment"
         tools:layout="@layout/home_fragment"
         android:label="HomeFragment" />
 
     <fragment
         android:id="@+id/action_stock"
         tools:layout="@layout/stock_fragment"
-        android:name="com.example.apprajapati.myshop.StockFragment"
+        android:name="com.example.apprajapati.myshop.shop.StockFragment"
         android:label="StockFragment" />
 
     <fragment
         android:id="@+id/action_shop"
         tools:layout="@layout/shop_fragment"
-        android:name="com.example.apprajapati.myshop.ShopFragment"
+        android:name="com.example.apprajapati.myshop.shop.ShopFragment"
         android:label="ShopFragment" />
 
     <fragment
         android:id="@+id/action_checkout"
         tools:layout="@layout/checkout_fragment"
-        android:name="com.example.apprajapati.myshop.CheckoutFragment"
+        android:name="com.example.apprajapati.myshop.checkout.CheckoutFragment"
         android:label="CheckoutFragment" />
 
     <fragment
         android:id="@+id/action_product_list"
         tools:layout="@layout/shop_products_fragment"
-        android:name="com.example.apprajapati.myshop.ShopProductsFragment"
+        android:name="com.example.apprajapati.myshop.products.ShopProductsFragment"
         android:label="ShopProductsFragment" >
         <action
             android:id="@+id/action_fragment_shop_online_to_productDetails"
@@ -43,7 +43,7 @@
     </fragment>
     <fragment
         android:id="@+id/productDetails"
-        android:name="com.example.apprajapati.myshop.ProductDetails"
+        android:name="com.example.apprajapati.myshop.products.ProductDetails"
         android:label="fragment_product_details"
         tools:layout="@layout/fragment_product_details" />
 </navigation>

@@ -1,4 +1,4 @@
-package com.example.apprajapati.myshop
+package com.example.apprajapati.myshop.checkout
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -6,8 +6,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
+import com.example.apprajapati.myshop.R
 import com.example.apprajapati.myshop.databinding.CheckoutFragmentBinding
 import com.example.apprajapati.myshop.viewmodel.CheckoutViewModel
 import com.google.android.material.snackbar.Snackbar

@@ -1,4 +1,4 @@
-package com.example.apprajapati.myshop
+package com.example.apprajapati.myshop.products
 
 import android.os.Bundle
 import android.util.Log
@@ -9,6 +9,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
+import com.example.apprajapati.myshop.R
 import com.example.apprajapati.myshop.data.Product
 import com.example.apprajapati.myshop.databinding.ShopProductsFragmentBinding
 import com.example.apprajapati.myshop.viewmodel.CheckoutViewModel
@@ -31,7 +32,8 @@ class ShopProductsFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
 
-        _binding = DataBindingUtil.inflate(inflater,R.layout.shop_products_fragment,  container,false)
+        _binding = DataBindingUtil.inflate(inflater,
+            R.layout.shop_products_fragment,  container,false)
         return binding.root
     }
 
