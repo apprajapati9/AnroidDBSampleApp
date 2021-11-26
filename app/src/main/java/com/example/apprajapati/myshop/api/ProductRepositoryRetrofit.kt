@@ -1,8 +1,11 @@
 package com.example.apprajapati.myshop.api
 
+import android.Manifest
 import android.app.Application
 import android.content.Context
+import android.content.pm.PackageManager
 import android.util.Log
+import androidx.core.content.ContextCompat
 import com.example.apprajapati.myshop.api.ProductApi
 import com.example.apprajapati.myshop.data.Product
 import com.squareup.moshi.Moshi
@@ -75,6 +78,33 @@ class ProductRepositoryRetrofit(private val app: Application) {
          */
         val file = File(app.cacheDir, INTERNAL_PRODUCT_FILE_NAME)
         file.writeText(productString)
+    }
+
+    private fun storeDataInExternalStorage(products: List<Product>) {
+        //First request permission since it is a dangerous permission
+        // for transparency and security reason should take consent of a user
+
+        if (ContextCompat.checkSelfPermission(
+                app,
+                Manifest.permission.WRITE_EXTERNAL_STORAGE
+            ) == PackageManager.PERMISSION_GRANTED
+        ) {
+
+            val listType = Types.newParameterizedType(
+                List::class.java, Product::class.java
+            )
+
+            val productString = moshi.adapter<List<Product>>(listType).toJson(products)
+
+            val file = File(
+                app.getExternalFilesDir("products"),
+                INTERNAL_PRODUCT_FILE_NAME
+            ) //same goes for reading for reading external dir
+            //path in device file exp = sdcard/android/data/package.name/files/directory_named/filename
+
+            file.writeText(productString)
+
+        }
     }
 
     private fun readDataFromFile() : List<Product>{
