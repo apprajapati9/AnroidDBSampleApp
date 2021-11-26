@@ -31,6 +31,7 @@
     <string name="tours_label">Tours</string>
     <string name="shop_label">Shop</string>
     <string name="tours_header_label">TOURS</string>
+    <string name="shop_product_list">Products</string>
 
     <!-- Stock fragment -->
     <string name="fragment_title_name">Show Me the Data!</string>

@@ -61,6 +61,7 @@ class MainActivity : AppCompatActivity() {
                     R.id.action_shop -> goShop()
                     R.id.action_tours -> goTour()
                     R.id.action_checkout -> goCheckout()
+                    R.id.product_list -> goProductList()
                     else -> false
                 }
                 
@@ -110,6 +111,13 @@ class MainActivity : AppCompatActivity() {
     private fun goCheckout(): Boolean {
         supportFragmentManager.commit {
             replace(R.id.fragmentContainer, CheckoutFragment::class.java, null)
+        }
+        return true
+    }
+
+    private fun goProductList() : Boolean {
+        supportFragmentManager.commit {
+            replace(R.id.fragmentContainer, ShopProductsFragment::class.java, null)
         }
         return true
     }
