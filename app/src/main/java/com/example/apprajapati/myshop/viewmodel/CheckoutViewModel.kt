@@ -26,7 +26,7 @@ class CheckoutViewModel(appContext: Application) : AndroidViewModel(appContext) 
     private val _products : MutableLiveData<List<Product>> = MutableLiveData()
     val products : LiveData<List<Product>> = _products
 
-    private var  productRepository : ProductRepositoryLocal = ProductRepositoryLocal()
+    private var  productRepositoryLocal : ProductRepositoryLocal = ProductRepositoryLocal()
     private var stockRepository: StockRepository = StockRepository(appContext)
 
     init {
@@ -35,7 +35,7 @@ class CheckoutViewModel(appContext: Application) : AndroidViewModel(appContext) 
         //productRepository.getDataFromAsset(appContext, "olive_oils_data.json")
 
         //Code is to show that how data can be fetched from local file, you can delete if needed.
-        val data = productRepository.getProducts(appContext, "olive_oils_data.json")
+        val data = productRepositoryLocal.getProducts(appContext, "olive_oils_data.json")
         data?.let {
             _products.value = it
         }

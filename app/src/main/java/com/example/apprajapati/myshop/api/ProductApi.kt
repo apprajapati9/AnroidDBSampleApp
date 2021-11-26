@@ -1,0 +1,13 @@
+package com.example.apprajapati.myshop.api
+
+import com.example.apprajapati.myshop.data.Product
+import retrofit2.http.GET
+
+interface ProductApi {
+
+    @GET("olive_oils_data.json")
+    suspend fun getProducts() : List<Product>
+}
+
+
+//TODO : What is Asynchronous work? n how suspend works.
