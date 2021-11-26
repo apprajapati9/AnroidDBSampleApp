@@ -1,12 +1,14 @@
 package com.example.apprajapati.myshop
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import com.example.apprajapati.myshop.data.Product
 import com.example.apprajapati.myshop.databinding.ShopProductsFragmentBinding
 import com.example.apprajapati.myshop.viewmodel.CheckoutViewModel
 
@@ -14,6 +16,10 @@ class ShopProductsFragment : Fragment() {
 
     private var _binding: ShopProductsFragmentBinding? = null
     private val binding get() = _binding!!
+
+    private val onItemClick: (Product) -> Unit = {
+            product -> Log.i("Ajay", "$product.name")
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -35,7 +41,7 @@ class ShopProductsFragment : Fragment() {
 
         productViewModel?.products?.observe(viewLifecycleOwner, {
             products ->
-                binding.productList.adapter = ProductAdapter(products)
+                binding.productList.adapter = ProductAdapter(products, onItemClick)
         })
     }
 

@@ -2,19 +2,18 @@ package com.example.apprajapati.myshop
 
 import android.annotation.SuppressLint
 import android.icu.text.NumberFormat
-import android.os.Build
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import androidx.annotation.RequiresApi
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
 import com.example.apprajapati.myshop.data.Product
 import com.example.apprajapati.myshop.databinding.ProductItemBinding
 
 
-class ProductAdapter (private val productItems: List<Product>)
-    : RecyclerView.Adapter<ProductAdapter.ProductViewHolder>()  {
+class ProductAdapter(
+    private val productItems: List<Product>,
+    private val onItemClick: (Product) -> Unit)
+        : RecyclerView.Adapter<ProductAdapter.ProductViewHolder>()  {
 
 
 
@@ -31,6 +30,8 @@ class ProductAdapter (private val productItems: List<Product>)
     @SuppressLint("NewApi")
     override fun onBindViewHolder(holder: ProductViewHolder, position: Int) {
         val product = productItems[position]
+
+
         with(holder.binding) {
             productNameText.text = product.name
             sizeText.text = sizeText.context.resources.getString(
@@ -38,8 +39,15 @@ class ProductAdapter (private val productItems: List<Product>)
                 product.size)
             priceText.text = NumberFormat.getCurrencyInstance().format(product.price)
 
-            productImage.load(product.imageFile)
+            productImage.load(product.imageFile) {
+                crossfade(true)
+                //crossfade(1000)
+            }
 
+        }
+
+        holder.itemView.setOnClickListener{
+            onItemClick(product)
         }
     }
 
