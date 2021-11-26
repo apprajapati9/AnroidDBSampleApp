@@ -5,9 +5,9 @@ import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import com.example.apprajapati.myshop.R
 import com.example.apprajapati.myshop.data.ProductRepository
+import com.example.apprajapati.myshop.data.Stock
+import com.example.apprajapati.myshop.data.StockRepository
 
 private const val PRICE_PER_QUANTITY = 5
 
@@ -19,17 +19,29 @@ class CheckoutViewModel(appContext: Application) : AndroidViewModel(appContext) 
     val quantity : LiveData<Int> = _quantity
     val totalPrice : LiveData<Int> = _totalPrice
 
-    var productRepository : ProductRepository = ProductRepository()
+    private val _stockInfo :MutableLiveData<Stock> = MutableLiveData()
+    val stockInfo: LiveData<Stock> = _stockInfo
+
+    private var  productRepository : ProductRepository = ProductRepository()
+    private var stockRepository: StockRepository = StockRepository(appContext)
 
     init {
         //either raw or assets both work.
         //productRepository.getDataFromResource(appContext, R.raw.olive_oils_data)
         //productRepository.getDataFromAsset(appContext, "olive_oils_data.json")
 
+        //Code is to show that how data can be fetched from local file, you can delete if needed.
         val data = productRepository.getProducts(appContext, "olive_oils_data.json")
-
         data?.forEach {
             Log.i("Ajay", "$it.name")
+        }
+    }
+
+    //This function is for StockFragment only.
+    fun getStockData(firmId : Int){
+        val stock = stockRepository.getStockDataForFirm(firmId)
+        stock?.let {
+            _stockInfo.value = it
         }
     }
 

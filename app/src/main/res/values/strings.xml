@@ -31,4 +31,12 @@
     <string name="tours_label">Tours</string>
     <string name="shop_label">Shop</string>
     <string name="tours_header_label">TOURS</string>
+
+    <!-- Stock fragment -->
+    <string name="fragment_title_name">Show Me the Data!</string>
+    <string name="choose_stock_label">Choose your stock below</string>
+    <string name="firm_1_btn_label">IRMN</string>
+    <string name="firm_2_btn_label">BTMN</string>
+    <string name="firm_3_btn_label">ZMBI</string>
+    <string name="stock_info">Open: %.2f\n\nClose: %.2f\n\nChange: (%.2f)</string>
 </resources>

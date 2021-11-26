@@ -33,7 +33,7 @@ class MainActivity : AppCompatActivity() {
 
              If you just want to replace findViewById methods then viewBinding provides speed and efficiency
              however, databinding is superset of viewBinding in which you can handle data as well, with ViewBinding
-             you can just eliminate boilerplace findViewById codes.
+             you can just eliminate boilerplate findViewById codes.
          */
 
         /*
@@ -97,9 +97,12 @@ class MainActivity : AppCompatActivity() {
         return true
     }
 
+    /*
+        Update tab based on which fragment you wanna show/display to test a particular fragment
+     */
     private fun goTour(): Boolean {
         supportFragmentManager.commit {
-            replace(R.id.fragmentContainer, TourFragment::class.java, null)
+            replace(R.id.fragmentContainer, StockFragment::class.java, null)
         }
         return true
     }
