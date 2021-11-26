@@ -78,6 +78,11 @@ class CheckoutViewModel(val appContext: Application) : AndroidViewModel(appConte
     fun decreaseQuantity(){
         if(_quantity.value!! > 0){ // quantity cannot be in minus... safe check
             _quantity.value = quantity.value!!.minus(1)
+
+            PreferenceManager.getDefaultSharedPreferences(appContext)
+                .edit()
+                .putInt("cart_items", _quantity.value!!)
+                .apply()
         }
     }
 
