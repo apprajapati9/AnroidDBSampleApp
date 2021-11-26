@@ -1,12 +1,13 @@
 package com.example.apprajapati.myshop.api
 
 import com.example.apprajapati.myshop.data.Product
+import retrofit2.Response
 import retrofit2.http.GET
 
 interface ProductApi {
 
     @GET("olive_oils_data.json")
-    suspend fun getProducts() : List<Product>
+    suspend fun getProducts() : Response<List<Product>>
 }
 
 

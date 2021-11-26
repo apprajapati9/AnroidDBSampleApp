@@ -2,13 +2,13 @@ package com.example.apprajapati.myshop.viewmodel
 
 import android.app.Application
 import android.util.Log
-import androidx.lifecycle.AndroidViewModel
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.*
+import com.example.apprajapati.myshop.api.ProductRepositoryRetrofit
 import com.example.apprajapati.myshop.data.Product
 import com.example.apprajapati.myshop.data.ProductRepositoryLocal
 import com.example.apprajapati.myshop.data.Stock
 import com.example.apprajapati.myshop.data.StockRepository
+import kotlinx.coroutines.launch
 
 private const val PRICE_PER_QUANTITY = 5
 
@@ -23,11 +23,20 @@ class CheckoutViewModel(appContext: Application) : AndroidViewModel(appContext) 
     private val _stockInfo :MutableLiveData<Stock> = MutableLiveData()
     val stockInfo: LiveData<Stock> = _stockInfo
 
-    private val _products : MutableLiveData<List<Product>> = MutableLiveData()
-    val products : LiveData<List<Product>> = _products
+    private var productsApi : ProductRepositoryRetrofit = ProductRepositoryRetrofit()
+
+    private val _local_products : MutableLiveData<List<Product>> = MutableLiveData()
+    val local_products : LiveData<List<Product>> = _local_products
+
+    //private val _products : MutableLiveData<List<Product>> = MutableLiveData()
+    val products : LiveData<List<Product>> = liveData {
+        val data = productsApi.getProducts()
+        emit(data)
+    }
 
     private var  productRepositoryLocal : ProductRepositoryLocal = ProductRepositoryLocal()
     private var stockRepository: StockRepository = StockRepository(appContext)
+
 
     init {
         //either raw or assets both work.
@@ -37,7 +46,7 @@ class CheckoutViewModel(appContext: Application) : AndroidViewModel(appContext) 
         //Code is to show that how data can be fetched from local file, you can delete if needed.
         val data = productRepositoryLocal.getProducts(appContext, "olive_oils_data.json")
         data?.let {
-            _products.value = it
+            _local_products.value = it
         }
     }
 
@@ -62,5 +71,15 @@ class CheckoutViewModel(appContext: Application) : AndroidViewModel(appContext) 
     fun checkout(){
         _totalPrice.value =_quantity.value!! * PRICE_PER_QUANTITY
     }
+
+    //this approach isn't working...
+//    suspend fun getProducts(){
+//        viewModelScope.launch {
+//            val products = productsApi.api.getProducts()
+//            Log.i("Ajay", "Online data= $products")
+//            _products.value  = products
+//        }
+//
+//    }
 
 }

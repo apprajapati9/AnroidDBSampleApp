@@ -1,6 +1,9 @@
 package com.example.apprajapati.myshop.api
 
+import android.content.Context
+import android.util.Log
 import com.example.apprajapati.myshop.api.ProductApi
+import com.example.apprajapati.myshop.data.Product
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import retrofit2.Retrofit
@@ -21,7 +24,13 @@ class ProductRepositoryRetrofit {
         build()
     }
 
-    private val api: ProductApi by lazy {
+    val api: ProductApi by lazy {
         retrofit.create(ProductApi::class.java)
+    }
+
+    suspend  fun getProducts(): List<Product> {
+        val products = api.getProducts()
+        Log.i("Ajay", "Data = ${products.body()}" )
+        return if(products.isSuccessful) products.body()!! else emptyList()
     }
 }

@@ -52,6 +52,8 @@ dependencies {
     implementation "androidx.lifecycle:lifecycle-runtime-ktx:2.4.0"
     //view model and activity.. use i.e by viewModels<ViewModelClass>()
     implementation "androidx.activity:activity-ktx:1.4.0"
+    //lifecycle livedata
+    implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.4.0'
 
     // remember to add fragment library if you want to add fragments in Kotlin project
     implementation "androidx.fragment:fragment-ktx:1.4.0"
