@@ -49,5 +49,6 @@
 
     <!-- product details fragment -->
     <string name="add_to_cart_label">Add to Cart</string>
+    <string name="added_in_card">Added</string>
     <string name="product_image_label">Bottle of olive oil</string>
 </resources>

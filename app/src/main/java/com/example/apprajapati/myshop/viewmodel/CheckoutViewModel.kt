@@ -34,6 +34,11 @@ class CheckoutViewModel(appContext: Application) : AndroidViewModel(appContext) 
         emit(data)
     }
 
+    // for Product details fragment, to present details
+    val selectedProduct: MutableLiveData<Product> = MutableLiveData()
+
+
+
     private var  productRepositoryLocal : ProductRepositoryLocal = ProductRepositoryLocal()
     private var stockRepository: StockRepository = StockRepository(appContext)
 

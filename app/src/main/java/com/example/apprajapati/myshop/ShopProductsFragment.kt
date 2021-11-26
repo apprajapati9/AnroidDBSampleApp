@@ -15,11 +15,13 @@ import com.example.apprajapati.myshop.viewmodel.CheckoutViewModel
 
 class ShopProductsFragment : Fragment() {
 
+    private var viewModel: CheckoutViewModel? = null
     private var _binding: ShopProductsFragmentBinding? = null
     private val binding get() = _binding!!
 
     private val onItemClick: (Product) -> Unit = {
             product -> Log.i("Ajay", "$product.name")
+        viewModel?.selectedProduct?.value = product
         findNavController().navigate(R.id.action_fragment_shop_online_to_productDetails)
     }
 
@@ -37,11 +39,11 @@ class ShopProductsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val productViewModel = activity?.run {
+        viewModel = activity?.run {
             ViewModelProvider(this)[CheckoutViewModel::class.java]
         }
 
-        productViewModel?.products?.observe(viewLifecycleOwner, {
+        viewModel?.products?.observe(viewLifecycleOwner, {
             products ->
                 binding.productList.adapter = ProductAdapter(products, onItemClick)
         })

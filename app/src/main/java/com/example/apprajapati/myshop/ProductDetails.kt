@@ -1,59 +1,63 @@
 package com.example.apprajapati.myshop
 
+import android.icu.number.NumberFormatter
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.ViewModelProvider
+import coil.load
+import com.example.apprajapati.myshop.databinding.FragmentProductDetailsBinding
+import com.example.apprajapati.myshop.viewmodel.CheckoutViewModel
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-
-/**
- * A simple [Fragment] subclass.
- * Use the [ProductDetails.newInstance] factory method to
- * create an instance of this fragment.
- */
 class ProductDetails : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
-    }
+    private var viewModel: CheckoutViewModel? = null
+    private var _binding : FragmentProductDetailsBinding? = null
+    private val binding get() = _binding!!
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_product_details, container, false)
+        _binding = DataBindingUtil.inflate(inflater, R.layout.fragment_product_details, container, false)
+        return binding.root
     }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment ProductDetails.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            ProductDetails().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        viewModel = activity?.run {
+            ViewModelProvider(this)[CheckoutViewModel::class.java]
+        }
+
+        viewModel?.selectedProduct?.observe(viewLifecycleOwner, {
+            product ->
+            //can be done two ways.. 1.
+                binding.productImage.load(product.imageFile)
+            //2 way
+                with(product){
+                    binding.productNameText.text = name
+                    binding.descriptionText.text = description
+                    binding.sizeText.text = getString(R.string.product_size_lable, size)
+                    binding.priceText.text = price.toString()
                 }
-            }
+        })
+
+        binding.addToCartButton.setOnClickListener{
+            viewModel?.increaseQuantity()
+            binding.addToCartButton.isEnabled = false
+            binding.addToCartButton.text = getString(R.string.added_in_card)
+        }
+    }
+
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 }
