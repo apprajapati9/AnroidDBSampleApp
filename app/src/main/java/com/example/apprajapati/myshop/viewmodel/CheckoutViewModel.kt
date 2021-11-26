@@ -23,7 +23,7 @@ class CheckoutViewModel(appContext: Application) : AndroidViewModel(appContext) 
     private val _stockInfo :MutableLiveData<Stock> = MutableLiveData()
     val stockInfo: LiveData<Stock> = _stockInfo
 
-    private var productsApi : ProductRepositoryRetrofit = ProductRepositoryRetrofit()
+    private var productsApi : ProductRepositoryRetrofit = ProductRepositoryRetrofit(appContext)
 
     private val _local_products : MutableLiveData<List<Product>> = MutableLiveData()
     val local_products : LiveData<List<Product>> = _local_products
