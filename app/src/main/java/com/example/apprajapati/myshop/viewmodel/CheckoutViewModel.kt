@@ -1,6 +1,7 @@
 package com.example.apprajapati.myshop.viewmodel
 
 import android.app.Application
+import android.preference.PreferenceManager
 import android.util.Log
 import androidx.lifecycle.*
 import com.example.apprajapati.myshop.api.ProductRepositoryRetrofit
@@ -12,9 +13,11 @@ import kotlinx.coroutines.launch
 
 private const val PRICE_PER_QUANTITY = 5
 
-class CheckoutViewModel(appContext: Application) : AndroidViewModel(appContext) {
+class CheckoutViewModel(val appContext: Application) : AndroidViewModel(appContext) {
 
-    private val _quantity: MutableLiveData<Int> = MutableLiveData(0)
+    private val _quantity: MutableLiveData<Int> = MutableLiveData(
+         PreferenceManager.getDefaultSharedPreferences(appContext).getInt("cart_items", 0)
+    )
     private val _totalPrice: MutableLiveData<Int> = MutableLiveData()
 
     val quantity : LiveData<Int> = _quantity
@@ -65,6 +68,11 @@ class CheckoutViewModel(appContext: Application) : AndroidViewModel(appContext) 
 
     fun increaseQuantity(){
         _quantity.value = quantity.value!!.plus (1)
+
+        PreferenceManager.getDefaultSharedPreferences(appContext)
+            .edit()
+            .putInt("cart_items", _quantity.value!!)
+            .apply()
     }
 
     fun decreaseQuantity(){
