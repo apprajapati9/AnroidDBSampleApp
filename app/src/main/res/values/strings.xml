@@ -40,4 +40,5 @@
     <string name="firm_2_btn_label">BTMN</string>
     <string name="firm_3_btn_label">ZMBI</string>
     <string name="stock_info">Open: %.2f\n\nClose: %.2f\n\nChange: (%.2f)</string>
+    <string name="bottle_image">Image of the olive oil bottle</string>
 </resources>
