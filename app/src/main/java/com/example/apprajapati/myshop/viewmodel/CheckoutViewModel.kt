@@ -6,7 +6,7 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.example.apprajapati.myshop.data.Product
-import com.example.apprajapati.myshop.data.ProductRepository
+import com.example.apprajapati.myshop.data.ProductRepositoryLocal
 import com.example.apprajapati.myshop.data.Stock
 import com.example.apprajapati.myshop.data.StockRepository
 
@@ -26,7 +26,7 @@ class CheckoutViewModel(appContext: Application) : AndroidViewModel(appContext) 
     private val _products : MutableLiveData<List<Product>> = MutableLiveData()
     val products : LiveData<List<Product>> = _products
 
-    private var  productRepository : ProductRepository = ProductRepository()
+    private var  productRepository : ProductRepositoryLocal = ProductRepositoryLocal()
     private var stockRepository: StockRepository = StockRepository(appContext)
 
     init {

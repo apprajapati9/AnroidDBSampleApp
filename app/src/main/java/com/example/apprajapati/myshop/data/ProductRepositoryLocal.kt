@@ -6,7 +6,12 @@ import com.squareup.moshi.Moshi
 import com.squareup.moshi.Types
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 
-class ProductRepository {
+/*
+    NOTE: Class strictly to load data from internal source of app .Json files
+    To know how to fetch it from online API, there's different class
+    Just to see how it can be done offline from a file as well.
+ */
+class ProductRepositoryLocal {
 
     //To read from raw directory..
     fun getDataFromResource(context: Context, resourceId: Int): String? {
