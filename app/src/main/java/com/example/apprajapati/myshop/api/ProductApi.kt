@@ -8,6 +8,9 @@ interface ProductApi {
 
     @GET("olive_oils_data.json")
     suspend fun getProducts() : Response<List<Product>>
+
+    @GET("olive_oils_with_images_data.json")
+    suspend fun getProductsWithImages() : Response<List<Product>>
 }
 
 

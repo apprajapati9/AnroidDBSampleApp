@@ -33,4 +33,10 @@ class ProductRepositoryRetrofit {
         Log.i("Ajay", "Data = ${products.body()}" )
         return if(products.isSuccessful) products.body()!! else emptyList()
     }
+
+    suspend  fun getProductsWithImages(): List<Product> {
+        val products = api.getProductsWithImages()
+        Log.i("Ajay", "Data = ${products.body()}" )
+        return if(products.isSuccessful) products.body()!! else emptyList()
+    }
 }

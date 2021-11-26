@@ -30,7 +30,7 @@ class CheckoutViewModel(appContext: Application) : AndroidViewModel(appContext) 
 
     //private val _products : MutableLiveData<List<Product>> = MutableLiveData()
     val products : LiveData<List<Product>> = liveData {
-        val data = productsApi.getProducts()
+        val data = productsApi.getProductsWithImages() //getProducts() for non image API
         emit(data)
     }
 
