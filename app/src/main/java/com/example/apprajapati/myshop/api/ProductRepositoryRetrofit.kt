@@ -12,6 +12,7 @@ import com.example.apprajapati.myshop.data.ProductDatabase
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.Types
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
+import kotlinx.coroutines.flow.Flow
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 import java.io.File
@@ -61,11 +62,27 @@ class ProductRepositoryRetrofit(private val app: Application) {
             val products = response.body()?: emptyList()
 
             storeDataInDb(products)
+            //storeDataInFile()
 
             products
 
         } else emptyList()
     }
+
+    suspend fun loadProducts() {
+        if(productDao.getCount() <= 0) {
+            val response = api.getProductsWithImages()
+            if(response.isSuccessful){
+                val products = response.body() ?: emptyList()
+                storeDataInDb(products)
+            }
+        }
+    }
+
+    fun getProducts_(): Flow<List<Product>> {
+        return productDao.getProducts()
+    }
+
 
     private suspend fun storeDataInDb(products: List<Product>?){
         if(products != null){

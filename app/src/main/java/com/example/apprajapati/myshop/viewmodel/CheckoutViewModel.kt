@@ -1,8 +1,6 @@
 package com.example.apprajapati.myshop.viewmodel
 
 import android.app.Application
-import android.preference.PreferenceManager
-import android.util.Log
 import androidx.lifecycle.*
 import com.example.apprajapati.myshop.api.ProductRepositoryRetrofit
 import com.example.apprajapati.myshop.data.Product
@@ -15,9 +13,7 @@ private const val PRICE_PER_QUANTITY = 5
 
 class CheckoutViewModel(val appContext: Application) : AndroidViewModel(appContext) {
 
-    private val _quantity: MutableLiveData<Int> = MutableLiveData(
-         PreferenceManager.getDefaultSharedPreferences(appContext).getInt("cart_items", 0)
-    )
+    private val _quantity: MutableLiveData<Int> = MutableLiveData()
     private val _totalPrice: MutableLiveData<Int> = MutableLiveData()
 
     val quantity : LiveData<Int> = _quantity
@@ -32,10 +28,9 @@ class CheckoutViewModel(val appContext: Application) : AndroidViewModel(appConte
     val local_products : LiveData<List<Product>> = _local_products
 
     //private val _products : MutableLiveData<List<Product>> = MutableLiveData()
-    val products : LiveData<List<Product>> = liveData {
-        val data = productsApi.getProductsWithImages() //getProducts() for non image API
-        emit(data)
-    }
+    val products : LiveData<List<Product>> =
+        productsApi.getProducts_().asLiveData()
+
 
     // for Product details fragment, to present details
     val selectedProduct: MutableLiveData<Product> = MutableLiveData()
@@ -56,6 +51,10 @@ class CheckoutViewModel(val appContext: Application) : AndroidViewModel(appConte
         data?.let {
             _local_products.value = it
         }
+
+        viewModelScope.launch {
+            productsApi.loadProducts()
+        }
     }
 
     //This function is for StockFragment only.
@@ -68,21 +67,11 @@ class CheckoutViewModel(val appContext: Application) : AndroidViewModel(appConte
 
     fun increaseQuantity(){
         _quantity.value = quantity.value!!.plus (1)
-
-        PreferenceManager.getDefaultSharedPreferences(appContext)
-            .edit()
-            .putInt("cart_items", _quantity.value!!)
-            .apply()
     }
 
     fun decreaseQuantity(){
         if(_quantity.value!! > 0){ // quantity cannot be in minus... safe check
             _quantity.value = quantity.value!!.minus(1)
-
-            PreferenceManager.getDefaultSharedPreferences(appContext)
-                .edit()
-                .putInt("cart_items", _quantity.value!!)
-                .apply()
         }
     }
 
