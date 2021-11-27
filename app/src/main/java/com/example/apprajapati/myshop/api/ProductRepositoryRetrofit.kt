@@ -76,6 +76,7 @@ class ProductRepositoryRetrofit(private val app: Application) {
             if(response.isSuccessful){
                 val products = response.body() ?: emptyList()
                 storeDataInDb(products)
+                getTotalQuantity()
             }
         }
     }
@@ -85,6 +86,14 @@ class ProductRepositoryRetrofit(private val app: Application) {
         return productDao.getProducts()
     }
 
+    fun getTotalQuantity(): Flow<Int> {
+        return productDao.getTotalQuantity()
+    }
+
+
+    suspend fun updateProduct(product: Product){
+        return productDao.updateProduct(product)
+    }
 
     private suspend fun storeDataInDb(products: List<Product>?){
         if(products != null){

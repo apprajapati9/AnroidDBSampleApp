@@ -49,7 +49,7 @@ class CheckoutFragment: Fragment() {
             updateQuantity(it)
         }
 
-        checkoutModel!!.totalPrice.observe(requireActivity()){
+        checkoutModel.totalPrice.observe(requireActivity()){
             showSnackbar(it)
         }
 

@@ -8,6 +8,7 @@ import com.example.apprajapati.myshop.data.ProductRepositoryLocal
 import com.example.apprajapati.myshop.data.Stock
 import com.example.apprajapati.myshop.data.StockRepository
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.selects.select
 
 private const val PRICE_PER_QUANTITY = 5
 
@@ -15,9 +16,6 @@ class CheckoutViewModel(val appContext: Application) : AndroidViewModel(appConte
 
     private val _quantity: MutableLiveData<Int> = MutableLiveData(0)
     private val _totalPrice: MutableLiveData<Int> = MutableLiveData()
-
-    val quantity : LiveData<Int> = _quantity
-    val totalPrice : LiveData<Int> = _totalPrice
 
     private val _stockInfo :MutableLiveData<Stock> = MutableLiveData()
     val stockInfo: LiveData<Stock> = _stockInfo
@@ -34,7 +32,8 @@ class CheckoutViewModel(val appContext: Application) : AndroidViewModel(appConte
 
     // for Product details fragment, to present details
     val selectedProduct: MutableLiveData<Product> = MutableLiveData()
-
+    val quantity = productsApi.getTotalQuantity().asLiveData()
+    val totalPrice : LiveData<Int> = _totalPrice
 
 
     private var  productRepositoryLocal : ProductRepositoryLocal = ProductRepositoryLocal()
@@ -66,17 +65,33 @@ class CheckoutViewModel(val appContext: Application) : AndroidViewModel(appConte
     }
 
     fun increaseQuantity(){
-        _quantity.value = quantity.value!!.plus (1)
+        selectedProduct.value?.let {
+            product ->
+                viewModelScope.launch {
+                    product.quantity++
+                    productsApi.updateProduct(product)
+                }
+        }
     }
 
     fun decreaseQuantity(){
-        if(_quantity.value!! > 0){ // quantity cannot be in minus... safe check
-            _quantity.value = quantity.value!!.minus(1)
+//        if(_quantity.value!! > 0){ // quantity cannot be in minus... safe check
+//            _quantity.value = quantity.value!!.minus(1)
+//        }
+
+        selectedProduct.value?.let {
+                product ->
+                    viewModelScope.launch {
+                        if(product.quantity > 0) {
+                            product.quantity--
+                            productsApi.updateProduct(product)
+                        }
+                    }
         }
     }
 
     fun checkout(){
-        _totalPrice.value =_quantity.value!! * PRICE_PER_QUANTITY
+        _totalPrice.value = quantity.value!! * PRICE_PER_QUANTITY
     }
 
     //this approach isn't working...
