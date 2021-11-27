@@ -71,6 +71,7 @@ class ProductRepositoryRetrofit(private val app: Application) {
 
     suspend fun loadProducts() {
         if(productDao.getCount() <= 0) {
+            Log.i("Ajay", "loadProducts():: data gotten from web service")
             val response = api.getProductsWithImages()
             if(response.isSuccessful){
                 val products = response.body() ?: emptyList()
@@ -80,6 +81,7 @@ class ProductRepositoryRetrofit(private val app: Application) {
     }
 
     fun getProducts_(): Flow<List<Product>> {
+        Log.i("Ajay", "loadProducts()_:: data gotten from database")
         return productDao.getProducts()
     }
 

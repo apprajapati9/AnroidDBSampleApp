@@ -13,7 +13,7 @@ private const val PRICE_PER_QUANTITY = 5
 
 class CheckoutViewModel(val appContext: Application) : AndroidViewModel(appContext) {
 
-    private val _quantity: MutableLiveData<Int> = MutableLiveData()
+    private val _quantity: MutableLiveData<Int> = MutableLiveData(0)
     private val _totalPrice: MutableLiveData<Int> = MutableLiveData()
 
     val quantity : LiveData<Int> = _quantity

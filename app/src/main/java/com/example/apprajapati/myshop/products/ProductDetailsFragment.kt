@@ -51,9 +51,14 @@ class ProductDetailsFragment : Fragment() {
 
         binding.addToCartButton.setOnClickListener{
             viewModel?.increaseQuantity()
-            binding.addToCartButton.isEnabled = false
-            binding.addToCartButton.text = getString(R.string.added_in_card)
+            //binding.addToCartButton.isEnabled = false
+            //binding.addToCartButton.text = getString(R.string.added_in_card)
         }
+
+        binding.removeFromCartButton.setOnClickListener{
+            viewModel?.decreaseQuantity()
+        }
+
     }
 
 
