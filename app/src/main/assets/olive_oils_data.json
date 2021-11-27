@@ -33,5 +33,12 @@
     "description": "When you need an olive oil that’s smooth and buttery, with zero bitterness, and an ever-so-light peppery flavor. An excellent substitute for butter, and ideal for baking and seafood.",
     "size": 500,
     "price": 24.50
+  },
+  {
+    "productName": "Ajay",
+    "imageFile": "fantastic_bottle",
+    "description": "Doesn't need description",
+    "size": 1000,
+    "price": 500.50
   }
 ]

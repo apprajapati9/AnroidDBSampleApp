@@ -75,7 +75,7 @@ class ShopFragment : Fragment() {
                     productNames.appendLine(it.name)
                 }
                 //Note: Uncomment to display local data.
-                // binding.cartContentText.setText(productNames.toString())
+                 binding.cartContentText.setText(productNames.toString())
             }
 
         })
@@ -88,8 +88,8 @@ class ShopFragment : Fragment() {
                 product?.forEach {
                     productNames.appendLine(it.name)
                 }
-                //Note: Uncomment to display local data.
-                binding.cartContentText.setText(productNames.toString())
+                //Note: Uncomment to display data from web service.
+                //binding.cartContentText.setText(productNames.toString())
 
             }
 

@@ -46,11 +46,17 @@ class CheckoutFragment: Fragment() {
         }
 
         checkoutModel!!.quantity.observe(requireActivity()){
-            updateQuantity(it)
+            if(it != null){
+                updateQuantity(it)
+            }
+
         }
 
         checkoutModel.totalPrice.observe(requireActivity()){
-            showSnackbar(it)
+            if(it!=null) {
+                showSnackbar(it)
+            }
+
         }
 
         binding!!.checkoutButton.setOnClickListener{

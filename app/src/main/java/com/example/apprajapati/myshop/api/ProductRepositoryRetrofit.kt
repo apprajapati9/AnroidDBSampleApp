@@ -70,14 +70,17 @@ class ProductRepositoryRetrofit(private val app: Application) {
     }
 
     suspend fun loadProducts() {
-        if(productDao.getCount() <= 0) {
+        val count = productDao.getCount()
+        Log.i("Ajay", "loadProducts():: $count")
+        if(count <= 0) {
             Log.i("Ajay", "loadProducts():: data gotten from web service")
             val response = api.getProductsWithImages()
             if(response.isSuccessful){
                 val products = response.body() ?: emptyList()
                 storeDataInDb(products)
-                getTotalQuantity()
             }
+        }else{
+            getProducts_()
         }
     }
 
@@ -87,6 +90,7 @@ class ProductRepositoryRetrofit(private val app: Application) {
     }
 
     fun getTotalQuantity(): Flow<Int> {
+        Log.i("Ajay", "getTotalQuantity()_:: function called")
         return productDao.getTotalQuantity()
     }
 

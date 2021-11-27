@@ -5,6 +5,7 @@ import android.os.Bundle
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.FragmentActivity
 import androidx.fragment.app.commit
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavHost
 import androidx.navigation.fragment.NavHostFragment
@@ -85,14 +86,18 @@ class MainActivity : AppCompatActivity() {
 
 
         val viewModel = ViewModelProvider(this)[CheckoutViewModel::class.java]
-        viewModel.quantity.observe(this){
-            upgradeBadge(it)
-        }
+        viewModel.quantity.observe(this, object: Observer<Int>{
+            override fun onChanged(t: Int?) {
+                if(t!=null) {
+                    upgradeBadge(t)
+                }
+            }
+        })
     }
 
-    private fun upgradeBadge(item: Int?) {
+    private fun upgradeBadge(item: Int) {
         val badge = binding.tabs.getOrCreateBadge(R.id.action_shop)
-        if(item!! > 0){
+        if(item > 0){
             badge.number = item
             badge.isVisible = true
         }else{
