@@ -29,7 +29,10 @@ class StockFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         val myModel = activity?.run {
-            ViewModelProvider(requireActivity())[StockViewModel::class.java]
+            //Either use .get(class) or [class] after requireActivity from ViewModelProvider.
+            ViewModelProvider(requireActivity()).get(StockViewModel::class.java)
+            //valid as well
+            //ViewModelProvider(requireActivity())[StockViewModel::class.java]
         }
 
         myModel?.stockInfo?.observe(viewLifecycleOwner, {
