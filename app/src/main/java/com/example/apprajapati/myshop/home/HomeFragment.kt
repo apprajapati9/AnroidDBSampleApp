@@ -97,7 +97,7 @@ class HomeFragment : Fragment() {
 
         // view ->  could be replaced by _ -> .. Name shadowed.
         binding!!.homeFloatingbuttonShop.setOnClickListener{
-            view -> viewModel.loadData()
+            viewModel.loadData()
         }
     }
 

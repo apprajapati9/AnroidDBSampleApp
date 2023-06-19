@@ -67,11 +67,11 @@ class ShopFragment : Fragment() {
 
 
 
-        myModel?.local_products?.observe(this, object : Observer<List<Product>>{
-            override fun onChanged(local_product: List<Product>?) {
+        myModel?.local_products?.observe(viewLifecycleOwner, object : Observer<List<Product>>{
+            override fun onChanged(local_product: List<Product>) {
 
                 val productNames = StringBuilder()
-                local_product?.forEach {
+                local_product.forEach {
                     productNames.appendLine(it.name)
                 }
                 //Note: Uncomment to display local data.
@@ -81,11 +81,11 @@ class ShopFragment : Fragment() {
         })
 
 
-        myModel?.products?.observe(this, object : Observer<List<Product>>{
-            override fun onChanged(product: List<Product>?) {
+        myModel?.products?.observe(viewLifecycleOwner, object : Observer<List<Product>>{
+            override fun onChanged(product: List<Product>) {
 
                 val productNames = StringBuilder()
-                product?.forEach {
+                product.forEach {
                     productNames.appendLine(it.name)
                 }
                 //Note: Uncomment to display local data.
