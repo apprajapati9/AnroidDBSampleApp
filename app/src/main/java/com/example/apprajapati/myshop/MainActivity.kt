@@ -28,6 +28,8 @@ class MainActivity : AppCompatActivity() {
        // binding = ActivityMainBinding.inflate(layoutInflater)
         //setContentView(binding.root)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
+        val obs = MyActivityLifecycleObserver()
+        lifecycle.addObserver(obs) //Android lifecycle methods.
         /*
             -----viewBinding true vs dataBinding true in gradle-----
             There are two ways to inflate setcontentview and using viewBinding you can do by following..

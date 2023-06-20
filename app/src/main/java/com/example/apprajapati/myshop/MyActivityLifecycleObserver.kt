@@ -3,7 +3,8 @@ package com.example.apprajapati.myshop
 import android.util.Log
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleObserver
-import androidx.lifecycle.OnLifecycleEvent
+import androidx.lifecycle.DefaultLifecycleObserver
+import androidx.lifecycle.LifecycleOwner
 
 /*
     USE: many components in Android require you to subscribe or initialize components and unsubscribe or stop
@@ -24,29 +25,34 @@ import androidx.lifecycle.OnLifecycleEvent
 
  */
 
-class MyActivityLifecycleObserver : LifecycleObserver {
+class MyActivityLifecycleObserver : DefaultLifecycleObserver {
 
     companion object{
         private val LOG_TAG = MyActivityLifecycleObserver::class.simpleName
     }
 
-    @OnLifecycleEvent(Lifecycle.Event.ON_RESUME)
-    fun connect(){
+    override fun onStart(owner: LifecycleOwner) {
+        super.onStart(owner)
+        Log.i(LOG_TAG, "On Start" )
+    }
+
+    override fun onResume(owner: LifecycleOwner) {
+        super.onResume(owner)
         Log.i(LOG_TAG, "On Resume" )
     }
 
-    @OnLifecycleEvent(Lifecycle.Event.ON_STOP)
-    fun onStop(){
+    override fun onStop(owner: LifecycleOwner) {
+        super.onStop(owner)
         Log.i(LOG_TAG, "On Stop" )
     }
 
-    @OnLifecycleEvent(Lifecycle.Event.ON_DESTROY)
-    fun onDestroy(){
+    override fun onDestroy(owner: LifecycleOwner) {
+        super.onDestroy(owner)
         Log.i(LOG_TAG, "On Destroy" )
     }
 
-    @OnLifecycleEvent(Lifecycle.Event.ON_PAUSE)
-    fun disconnect(){
+    override fun onPause(owner: LifecycleOwner) {
+        super.onPause(owner)
         Log.i(LOG_TAG, "On Pause" )
     }
 }
